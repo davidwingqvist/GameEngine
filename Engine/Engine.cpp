@@ -4,6 +4,7 @@
 
 Engine::Engine()
 {
+	srand(NULL);
 	Debugger::Get();
 
 	Window::Desc config;
@@ -44,11 +45,13 @@ void Engine::Update()
 
 void Engine::Draw()
 {
+	m_pipelineManager.ClearScreen();
+
 	D2D1Core::Get().Begin();
 
 	static object2D obj(0, 0, 100, 100);
 
-	obj.x += 0.01f;
+	obj.x += 0.1f;
 
 	D2D1Core::Get().DrawP(obj, m_image->GetImage());
 
@@ -57,7 +60,7 @@ void Engine::Draw()
 	D3D11Core::Get().Present();
 }
 
-void Engine::Start()
+void Engine::EngineStart()
 {
 	while (!shutdown)
 	{

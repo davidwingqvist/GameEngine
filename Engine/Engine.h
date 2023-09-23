@@ -24,7 +24,7 @@ public:
 	~Engine();
 	void Update();
 	void Draw();
-	void Start();
+	void EngineStart();
 	
 };
 

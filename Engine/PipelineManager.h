@@ -8,7 +8,6 @@ private:
 
 	ID3D11RenderTargetView* m_backBuffer;
 	ID3D11UnorderedAccessView* m_backBufferAccessView;
-	ID3D11RenderTargetView* m_renderTargetView;
 
 	ID3D11DepthStencilState* m_depthStencilStateLess;
 	ID3D11Texture2D* m_depthStencilTexture;
@@ -39,6 +38,8 @@ public:
 
 	PipelineManager();
 	~PipelineManager();
+
+	void ClearScreen();
 
 };
 

@@ -1,10 +1,12 @@
 #include "Header.h"
 #include "PipelineManager.h"
 #include "D3D11Context.h"
+#include "Debugger.h"
 
 void PipelineManager::Initialize()
 {
-    this->CreateRenderTargetView();
+    if (!this->CreateRenderTargetView())
+        Debugger::Get().Print("Couldnt create RenderTargetView!\n", Debugger::COLOR_RED);
     this->CreateDepthStencilStates();
     this->CreateRasterizerStates();
     this->CreateSamplerStates();
@@ -15,7 +17,6 @@ PipelineManager::PipelineManager()
 {
     m_backBuffer = nullptr;
     m_backBufferAccessView = nullptr;
-    m_renderTargetView = nullptr;
     m_depthStencilStateLess = nullptr;
     m_depthStencilTexture = nullptr;
     m_depthStencilView = nullptr;
@@ -33,9 +34,6 @@ PipelineManager::~PipelineManager()
 
     if (m_backBufferAccessView)
         m_backBufferAccessView->Release();
-
-    if (m_renderTargetView)
-        m_renderTargetView->Release();
 
     if (m_depthStencilStateLess)
         m_depthStencilStateLess->Release();
@@ -60,6 +58,12 @@ PipelineManager::~PipelineManager()
 
     if (m_defaultInputLayout)
         m_defaultInputLayout->Release();
+}
+
+void PipelineManager::ClearScreen()
+{
+    const FLOAT clear = FLOAT(0);
+    D3D11Core::Get().Context()->ClearRenderTargetView(m_backBuffer, &clear);
 }
 
 bool PipelineManager::CreateRenderTargetView()
