@@ -25,6 +25,9 @@
     <Filter Include="Header Files\DirectCore">
       <UniqueIdentifier>{a3eef56f-f00e-4fc2-924d-b8361737ee54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Render2D">
+      <UniqueIdentifier>{63ac8500-e545-46de-b10f-3364f82af7bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Engine.cpp">
@@ -57,6 +60,15 @@
     <ClCompile Include="Engine\Resource.cpp">
       <Filter>Header Files\Resource</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Structs.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DrawManager.cpp">
+      <Filter>Header Files\Render2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DrawObject.cpp">
+      <Filter>Header Files\Render2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h">
@@ -88,6 +100,15 @@
     </ClInclude>
     <ClInclude Include="Engine\Header.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Structs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DrawManager.h">
+      <Filter>Header Files\Render2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DrawObject.h">
+      <Filter>Header Files\Render2D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -15,11 +15,8 @@ Engine::Engine()
 		return;
 	}
 
-
 	D3D11Core::Get().Initialize(&m_window);
 	D2D1Core::Get().Initialize();
-
-	m_image = ResourceManager::Get().GetResource<Image2D>("mainCharacter.png");
 
 	this->m_pipelineManager.Initialize();
 }
@@ -49,11 +46,7 @@ void Engine::Draw()
 
 	D2D1Core::Get().Begin();
 
-	static object2D obj(0, 0, 100, 100);
-
-	obj.x += 0.1f;
-
-	D2D1Core::Get().DrawP(obj, m_image->GetImage());
+	m_drawManager.Draw();
 
 	D2D1Core::Get().Commit();
 

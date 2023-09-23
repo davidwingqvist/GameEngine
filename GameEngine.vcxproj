@@ -22,24 +22,30 @@
     <ClCompile Include="Engine\D3D11Context.cpp" />
     <ClCompile Include="Engine\Debugger.cpp" />
     <ClCompile Include="Engine\Direct2DContext.cpp" />
+    <ClCompile Include="Engine\DrawManager.cpp" />
+    <ClCompile Include="Engine\DrawObject.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\GameEngine.cpp" />
     <ClCompile Include="Engine\PipelineManager.cpp" />
     <ClCompile Include="Engine\Resource.cpp" />
     <ClCompile Include="Engine\ResourceManager.cpp" />
     <ClCompile Include="Engine\Shader.cpp" />
+    <ClCompile Include="Engine\Structs.cpp" />
     <ClCompile Include="Engine\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\D3D11Context.h" />
     <ClInclude Include="Engine\Debugger.h" />
     <ClInclude Include="Engine\Direct2DContext.h" />
+    <ClInclude Include="Engine\DrawManager.h" />
+    <ClInclude Include="Engine\DrawObject.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Header.h" />
     <ClInclude Include="Engine\PipelineManager.h" />
     <ClInclude Include="Engine\Resource.h" />
     <ClInclude Include="Engine\ResourceManager.h" />
     <ClInclude Include="Engine\Shader.h" />
+    <ClInclude Include="Engine\Structs.h" />
     <ClInclude Include="Engine\Window.h" />
   </ItemGroup>
   <ItemGroup>

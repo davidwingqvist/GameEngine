@@ -4,7 +4,7 @@
 #include "PipelineManager.h"
 #include "Debugger.h"
 #include "ResourceManager.h"
-
+#include "DrawManager.h"
 
 class Engine
 {
@@ -13,12 +13,12 @@ private:
 	Window m_window;
 	PipelineManager m_pipelineManager;
 	bool shutdown = false;
-	std::shared_ptr<Image2D> m_image;
+	DrawManager m_drawManager;
 
 
 public:
 
-	recs::recs_registry m_registry;
+	recs::recs_registry m_3dObjects;
 
 	Engine();
 	~Engine();

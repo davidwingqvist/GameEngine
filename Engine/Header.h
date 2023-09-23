@@ -1,5 +1,6 @@
 #pragma once
 #include "../recs_base.h"
+#include "Structs.h"
 #include <memory>
 #include <time.h>
 #include <string>

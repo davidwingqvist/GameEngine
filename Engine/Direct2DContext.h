@@ -3,30 +3,6 @@
 #include<wincodec.h>
 #include <string>
 
-struct object2D
-{
-	float x;
-	float y;
-	float width;
-	float height;
-
-	object2D()
-	{
-		x = 0;
-		y = 0;
-		width = 0;
-		height = 0;
-	}
-
-	object2D(const float& x, const float& y, const float& width, const float& height)
-	{
-		this->x = x;
-		this->y = y;
-		this->width = width;
-		this->height = height;
-	}
-};
-
 class D2D1Core
 {
 private:
