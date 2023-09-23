@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Engine\D3D11Context.cpp" />
+    <ClCompile Include="Engine\Debugger.cpp" />
+    <ClCompile Include="Engine\Direct2DContext.cpp" />
+    <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Engine\GameEngine.cpp" />
+    <ClCompile Include="Engine\PipelineManager.cpp" />
+    <ClCompile Include="Engine\Resource.cpp" />
+    <ClCompile Include="Engine\ResourceManager.cpp" />
+    <ClCompile Include="Engine\Shader.cpp" />
+    <ClCompile Include="Engine\Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Engine\D3D11Context.h" />
+    <ClInclude Include="Engine\Debugger.h" />
+    <ClInclude Include="Engine\Direct2DContext.h" />
+    <ClInclude Include="Engine\Engine.h" />
+    <ClInclude Include="Engine\Header.h" />
+    <ClInclude Include="Engine\PipelineManager.h" />
+    <ClInclude Include="Engine\Resource.h" />
+    <ClInclude Include="Engine\ResourceManager.h" />
+    <ClInclude Include="Engine\Shader.h" />
+    <ClInclude Include="Engine\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="ThirdParty\RECS\RECS.vcxproj">
+      <Project>{bfa42f05-e23b-46b5-b000-8a36dc236da1}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{471d7b87-1a5f-4538-bb20-495485d8386a}</ProjectGuid>
+    <RootNamespace>GameEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ExecutablePath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;$(LibraryPath)</LibraryPath>
+    <PublicIncludeDirectories>RECS.lib;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <ExternalIncludePath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;$(ExternalIncludePath)</ExternalIncludePath>
+    <ReferencePath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;$(ReferencePath)</ReferencePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <IncludePath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Release;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Release;$(LibraryPath)</LibraryPath>
+    <PublicIncludeDirectories>RECS.lib;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IncludePath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <PublicIncludeDirectories>RECS.lib;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <ExternalIncludePath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;$(ExternalIncludePath)</ExternalIncludePath>
+    <ReferencePath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;$(ReferencePath)</ReferencePath>
+    <ExecutablePath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;$(VC_ExecutablePath_x86);$(CommonExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Release;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IncludePath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Release;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <PublicIncludeDirectories>RECS.lib;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalUsingDirectories>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);RECS.lib;d3d11.lib</AdditionalDependencies>
+    </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Release;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);RECS.lib;d3d11.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <PrecompiledHeaderFile>Header.h</PrecompiledHeaderFile>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <AdditionalUsingDirectories>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies);d3d11.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>Header.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies);RECS.lib;d3d11.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Release;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
