@@ -6,3 +6,5 @@
 #include <string>
 #include <d3d11.h>
 #include <d2d1.h>
+#include <functional>
+#include <chrono>

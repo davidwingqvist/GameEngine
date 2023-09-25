@@ -29,8 +29,10 @@
     <ClCompile Include="Engine\PipelineManager.cpp" />
     <ClCompile Include="Engine\Resource.cpp" />
     <ClCompile Include="Engine\ResourceManager.cpp" />
+    <ClCompile Include="Engine\Scene.cpp" />
     <ClCompile Include="Engine\Shader.cpp" />
     <ClCompile Include="Engine\Structs.cpp" />
+    <ClCompile Include="Engine\Time.cpp" />
     <ClCompile Include="Engine\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -44,8 +46,10 @@
     <ClInclude Include="Engine\PipelineManager.h" />
     <ClInclude Include="Engine\Resource.h" />
     <ClInclude Include="Engine\ResourceManager.h" />
+    <ClInclude Include="Engine\Scene.h" />
     <ClInclude Include="Engine\Shader.h" />
     <ClInclude Include="Engine\Structs.h" />
+    <ClInclude Include="Engine\Time.h" />
     <ClInclude Include="Engine\Window.h" />
   </ItemGroup>
   <ItemGroup>

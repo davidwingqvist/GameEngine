@@ -5,6 +5,8 @@
 #include "Debugger.h"
 #include "ResourceManager.h"
 #include "DrawManager.h"
+#include "Scene.h"
+#include "Time.h"
 
 class Engine
 {
@@ -15,6 +17,12 @@ private:
 	bool shutdown = false;
 	DrawManager m_drawManager;
 
+	std::unordered_map<std::string, Scene> m_scenes;
+	Scene* m_currentScene = nullptr;
+
+
+	void Update();
+	void Draw();
 
 public:
 
@@ -22,9 +30,15 @@ public:
 
 	Engine();
 	~Engine();
-	void Update();
-	void Draw();
-	void EngineStart();
+
+	/*
+	
+		Run this function to start the whole engine operation.
+	
+	*/
+	void Start();
+
+	void AddScene(const std::string& sceneName, const Scene& scene);
 	
 };
 

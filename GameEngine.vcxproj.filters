@@ -28,6 +28,12 @@
     <Filter Include="Header Files\Render2D">
       <UniqueIdentifier>{63ac8500-e545-46de-b10f-3364f82af7bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Stage">
+      <UniqueIdentifier>{3b671c8a-7656-4d55-91b7-466620f63058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Time">
+      <UniqueIdentifier>{94f55ca1-2c7e-447d-86b8-2d73211bbfbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Engine.cpp">
@@ -69,6 +75,12 @@
     <ClCompile Include="Engine\DrawObject.cpp">
       <Filter>Header Files\Render2D</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Scene.cpp">
+      <Filter>Header Files\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Time.cpp">
+      <Filter>Header Files\Time</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h">
@@ -109,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="Engine\DrawObject.h">
       <Filter>Header Files\Render2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Scene.h">
+      <Filter>Header Files\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Time.h">
+      <Filter>Header Files\Time</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

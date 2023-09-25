@@ -11,7 +11,7 @@ Engine::Engine()
 	config.title = L"Game";
 	if (!m_window.Initialize(config))
 	{
-		//ERROR
+		Debugger::Get().Print("Couldnt create Window!\n", Debugger::COLOR_RED);
 		return;
 	}
 
@@ -38,6 +38,9 @@ void Engine::Update()
 			shutdown = true;
 		}
 	}
+
+	if (m_currentScene)
+		m_currentScene->Update();
 }
 
 void Engine::Draw()
@@ -53,11 +56,20 @@ void Engine::Draw()
 	D3D11Core::Get().Present();
 }
 
-void Engine::EngineStart()
+void Engine::Start()
 {
 	while (!shutdown)
 	{
+		auto start = std::chrono::high_resolution_clock::now();
 		Update();
 		Draw();
+		auto end = std::chrono::high_resolution_clock::now();
+
+		Time::Get().SetDeltaTime(std::chrono::duration<float, std::milli>(end - start).count());
 	}
+}
+
+void Engine::AddScene(const std::string& sceneName, const Scene& scene)
+{
+	m_scenes.emplace(sceneName, scene);
 }

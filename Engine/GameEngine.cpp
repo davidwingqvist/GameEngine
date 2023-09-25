@@ -20,7 +20,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 #endif
 	Engine engine;
 
-	engine.EngineStart();
+	engine.Start();
 
 #if _DEBUG
 
