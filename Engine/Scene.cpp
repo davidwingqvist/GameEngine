@@ -5,13 +5,13 @@ Scene::Scene()
 {
 }
 
-Scene::Scene(recs::recs_registry* registry)
-{
-	m_registry = registry;
-}
-
 Scene::~Scene()
 {
+}
+
+recs::recs_registry* Scene::GetRegistry()
+{
+	return &m_registry;
 }
 
 void Scene::SetLogic(std::function<void()> function)
@@ -23,4 +23,9 @@ void Scene::Update()
 {
 	if (m_function)
 		m_function();
+}
+
+void Scene::Draw()
+{
+	m_drawManager.Draw();
 }

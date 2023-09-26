@@ -4,7 +4,6 @@
 #include "PipelineManager.h"
 #include "Debugger.h"
 #include "ResourceManager.h"
-#include "DrawManager.h"
 #include "Scene.h"
 #include "Time.h"
 
@@ -15,7 +14,6 @@ private:
 	Window m_window;
 	PipelineManager m_pipelineManager;
 	bool shutdown = false;
-	DrawManager m_drawManager;
 
 	std::unordered_map<std::string, Scene> m_scenes;
 	Scene* m_currentScene = nullptr;
@@ -25,8 +23,6 @@ private:
 	void Draw();
 
 public:
-
-	recs::recs_registry m_3dObjects;
 
 	Engine();
 	~Engine();
@@ -38,7 +34,13 @@ public:
 	*/
 	void Start();
 
-	void AddScene(const std::string& sceneName, const Scene& scene);
+	void AddScene(const std::string& sceneName);
+	void SetScene(const std::string& sceneName);
+	Scene* GetScene(const std::string& sceneName);
+
+	void SetSplashScreen();
+
+	void Shutdown();
 	
 };
 

@@ -39,14 +39,14 @@ inline std::shared_ptr<T> ResourceManager::GetResource(const std::string & filen
 
 		if (resource->Create(filename))
 		{
-			Debugger::Get().Print("Resource: " + filename + " created", Debugger::COLOR_GREEN);
+			Debugger::Get().Print("Resource: '" + filename + "' created.\n", Debugger::COLOR_GREEN);
 			m_resources.emplace(filename, resource);
 
 			return std::shared_ptr<T>(resource);
 		}
 		else
 		{
-			Debugger::Get().Print("Resource: " + filename + " couldnt be created", Debugger::COLOR_RED);
+			Debugger::Get().Print("Resource: " + filename + " couldnt be created.\n", Debugger::COLOR_RED);
 		}
 	}
 

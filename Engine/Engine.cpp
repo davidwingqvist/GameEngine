@@ -19,6 +19,11 @@ Engine::Engine()
 	D2D1Core::Get().Initialize();
 
 	this->m_pipelineManager.Initialize();
+
+
+	this->AddScene("Test");
+	this->SetScene("Test");
+	
 }
 
 Engine::~Engine()
@@ -49,7 +54,8 @@ void Engine::Draw()
 
 	D2D1Core::Get().Begin();
 
-	m_drawManager.Draw();
+	if (m_currentScene)
+		m_currentScene->Draw();
 
 	D2D1Core::Get().Commit();
 
@@ -69,7 +75,37 @@ void Engine::Start()
 	}
 }
 
-void Engine::AddScene(const std::string& sceneName, const Scene& scene)
+void Engine::AddScene(const std::string& sceneName)
 {
-	m_scenes.emplace(sceneName, scene);
+	Scene newScene;
+	m_scenes.emplace(sceneName, newScene);
+	Debugger::Get().Print("Added Scene: '" + sceneName + "'\n", Debugger::COLOR_GREEN);
 }
+
+void Engine::SetScene(const std::string& sceneName)
+{
+	if (m_scenes.find(sceneName) == m_scenes.end())
+	{
+		Debugger::Get().Print("No scene with the name: '" + sceneName + "' found.\n", Debugger::COLOR_RED);
+		return;
+	}
+
+	Debugger::Get().Print("Scene set to: '" + sceneName + "'\n", Debugger::COLOR_GREEN);
+	m_currentScene = &m_scenes[sceneName];
+}
+
+Scene* Engine::GetScene(const std::string& sceneName)
+{
+	return &m_scenes[sceneName];
+}
+
+void Engine::SetSplashScreen()
+{
+}
+
+void Engine::Shutdown()
+{
+	Debugger::Get().Print("Engine has started shutdown sequence.\n", Debugger::COLOR_WHITE);
+	shutdown = true;
+}
+
