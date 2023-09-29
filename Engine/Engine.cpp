@@ -24,6 +24,7 @@ Engine::Engine()
 	this->AddScene("Test");
 	this->SetScene("Test");
 	
+	this->SetSplashScreen("peeky.jpg");
 }
 
 Engine::~Engine()
@@ -99,8 +100,17 @@ Scene* Engine::GetScene(const std::string& sceneName)
 	return &m_scenes[sceneName];
 }
 
-void Engine::SetSplashScreen()
+void Engine::SetSplashScreen(const std::string& fileName)
 {
+	object2D splash(0,0, D3D11Core::Get().GetWindow()->GetWidth(), D3D11Core::Get().GetWindow()->GetHeight());
+
+	Image2D* image = ResourceManager::Get().GetResource<Image2D>(fileName).get();
+
+	m_pipelineManager.ClearScreen();
+	D2D1Core::Get().Begin();
+	D2D1Core::Get().DrawP(splash, image->GetImage());
+	D2D1Core::Get().Commit();
+	D3D11Core::Get().Present();
 }
 
 void Engine::Shutdown()

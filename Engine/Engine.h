@@ -38,7 +38,7 @@ public:
 	void SetScene(const std::string& sceneName);
 	Scene* GetScene(const std::string& sceneName);
 
-	void SetSplashScreen();
+	void SetSplashScreen(const std::string& fileName);
 
 	void Shutdown();
 	

@@ -6,17 +6,17 @@ class Scene
 private:
 
 	recs::recs_registry m_registry;
-	std::function<void()> m_function;
+	std::vector<recs::Entity> m_entities;
+	std::function<void(recs::recs_registry&)> m_function;
 	DrawManager m_drawManager;
 
 public:
 
+	Scene(recs::recs_registry* registry);
 	Scene();
 	~Scene();
 
-	recs::recs_registry* GetRegistry();
-
-	void SetLogic(std::function<void()> function);
+	void SetLogic(std::function<void(recs::recs_registry&)> function);
 
 	void Update();
 
