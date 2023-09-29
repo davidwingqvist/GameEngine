@@ -32,7 +32,7 @@ struct object2D
 	}
 };
 
-struct object3D
+struct position
 {
 	sm::Vector3 position;
 };

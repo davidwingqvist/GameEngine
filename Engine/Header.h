@@ -1,15 +1,26 @@
 #pragma once
 #include "../recs_base.h"
-#include "Structs.h"
-#include <DirectXMath.h>
+
+// DirectXTK
 #include <SimpleMath.h>
+#include <BufferHelpers.h>
+#include <Keyboard.h>
+#include <Mouse.h>
+
+// STANDARD LIBRARY
 #include <memory>
 #include <time.h>
 #include <string>
-#include <d3d11.h>
-#include <d2d1.h>
 #include <functional>
 #include <chrono>
 
+// DirectX
+#include <d3d11.h>
+#include <d2d1.h>
+
+
+
 namespace dx = DirectX;
-namespace sm = dx::SimpleMath;
+namespace sm = DirectX::SimpleMath;
+
+#include "Structs.h"

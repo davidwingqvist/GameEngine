@@ -36,7 +36,10 @@ class Model3D : public IResource
 {
 private:
 
-
+	ID3D11Buffer* vertexBuffer;
+	UINT vertexCount = 0;
+	ID3D11Buffer* indexBuffer;
+	UINT indexCount = 0;
 
 public:
 
