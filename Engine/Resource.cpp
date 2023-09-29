@@ -23,3 +23,18 @@ bool Image2D::Create(const std::string& filename)
 {
     return D2D1Core::Get().CreateImage(filename, &m_image);
 }
+
+Model3D::Model3D()
+{
+
+}
+
+Model3D::~Model3D()
+{
+
+}
+
+bool Model3D::Create(const std::string& filename)
+{
+    return true;
+}

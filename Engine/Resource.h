@@ -31,3 +31,18 @@ public:
 	virtual bool Create(const std::string& filename) override;
 
 };
+
+class Model3D : public IResource
+{
+private:
+
+
+
+public:
+
+	Model3D();
+	~Model3D();
+
+	// Inherited via IResource
+	virtual bool Create(const std::string& filename) override;
+};

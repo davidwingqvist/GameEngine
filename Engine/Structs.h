@@ -31,3 +31,13 @@ struct object2D
 		height = 0;
 	}
 };
+
+struct object3D
+{
+	sm::Vector3 position;
+};
+
+struct model
+{
+	sm::Matrix worldMatrix;
+};
