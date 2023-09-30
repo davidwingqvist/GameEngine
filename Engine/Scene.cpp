@@ -1,5 +1,6 @@
 #include "Header.h"
 #include "Scene.h"
+#include "D3D11Context.h"
 
 
 Scene::Scene()

@@ -41,6 +41,10 @@ private:
 	ID3D11Buffer* indexBuffer = nullptr;
 	UINT indexCount = 0;
 
+	bool CreateVertexBuffer(std::vector<model_data>& modelData);
+
+	bool CreateIndexBuffer(std::vector<UINT>& indices);
+
 public:
 
 	Model3D();

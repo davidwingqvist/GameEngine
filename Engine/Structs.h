@@ -37,6 +37,13 @@ struct position
 	sm::Vector3 position;
 };
 
+struct model_data
+{
+	float x = 0.0f;
+	float y = 0.0f;
+	float z = 0.0f;
+};
+
 struct model
 {
 	sm::Matrix worldMatrix;

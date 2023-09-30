@@ -23,6 +23,8 @@ Engine::Engine()
 
 	this->AddScene("Test");
 	this->SetScene("Test");
+
+	ResourceManager::Get().GetResource<Model3D>("Villager.fbx");
 	
 	this->SetSplashScreen("peeky.jpg");
 }
