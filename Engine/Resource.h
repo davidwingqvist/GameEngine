@@ -36,9 +36,9 @@ class Model3D : public IResource
 {
 private:
 
-	ID3D11Buffer* vertexBuffer;
+	ID3D11Buffer* vertexBuffer = nullptr;
 	UINT vertexCount = 0;
-	ID3D11Buffer* indexBuffer;
+	ID3D11Buffer* indexBuffer = nullptr;
 	UINT indexCount = 0;
 
 public:

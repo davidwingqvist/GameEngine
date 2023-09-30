@@ -4,7 +4,6 @@
 #include <assert.h>
 
 
-const std::string UIPATH = "Content/Graphics2D/";
 
 D2D1Core::D2D1Core()
 {

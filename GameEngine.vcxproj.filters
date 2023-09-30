@@ -13,25 +13,25 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Render">
-      <UniqueIdentifier>{774d2ff1-96af-4530-a755-a9085300be76}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Resource">
-      <UniqueIdentifier>{36351de5-21d6-44e5-92a2-bd2234a88411}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Debug">
+    <Filter Include="Debug">
       <UniqueIdentifier>{0a1148ea-9d4a-4cd0-9986-60db4c1ace64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\DirectCore">
+    <Filter Include="DirectCore">
       <UniqueIdentifier>{a3eef56f-f00e-4fc2-924d-b8361737ee54}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Render2D">
+    <Filter Include="Render">
+      <UniqueIdentifier>{774d2ff1-96af-4530-a755-a9085300be76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render2D">
       <UniqueIdentifier>{63ac8500-e545-46de-b10f-3364f82af7bf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Stage">
+    <Filter Include="Resource">
+      <UniqueIdentifier>{36351de5-21d6-44e5-92a2-bd2234a88411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage">
       <UniqueIdentifier>{3b671c8a-7656-4d55-91b7-466620f63058}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Time">
+    <Filter Include="Time">
       <UniqueIdentifier>{94f55ca1-2c7e-447d-86b8-2d73211bbfbf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -43,43 +43,43 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\D3D11Context.cpp">
-      <Filter>Header Files\DirectCore</Filter>
+      <Filter>DirectCore</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Direct2DContext.cpp">
-      <Filter>Header Files\DirectCore</Filter>
+      <Filter>DirectCore</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Shader.cpp">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="Engine\PipelineManager.cpp">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Window.cpp">
-      <Filter>Header Files\DirectCore</Filter>
+      <Filter>DirectCore</Filter>
     </ClCompile>
     <ClCompile Include="Engine\ResourceManager.cpp">
-      <Filter>Header Files\Resource</Filter>
+      <Filter>Resource</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Debugger.cpp">
-      <Filter>Header Files\Debug</Filter>
+      <Filter>Debug</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Resource.cpp">
-      <Filter>Header Files\Resource</Filter>
+      <Filter>Resource</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Structs.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\DrawManager.cpp">
-      <Filter>Header Files\Render2D</Filter>
+      <Filter>Render2D</Filter>
     </ClCompile>
     <ClCompile Include="Engine\DrawObject.cpp">
-      <Filter>Header Files\Render2D</Filter>
+      <Filter>Render2D</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Scene.cpp">
-      <Filter>Header Files\Stage</Filter>
+      <Filter>Stage</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Time.cpp">
-      <Filter>Header Files\Time</Filter>
+      <Filter>Time</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,28 +87,28 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\D3D11Context.h">
-      <Filter>Header Files\DirectCore</Filter>
+      <Filter>DirectCore</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Direct2DContext.h">
-      <Filter>Header Files\DirectCore</Filter>
+      <Filter>DirectCore</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Shader.h">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="Engine\PipelineManager.h">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Window.h">
-      <Filter>Header Files\DirectCore</Filter>
+      <Filter>DirectCore</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Resource.h">
-      <Filter>Header Files\Resource</Filter>
+      <Filter>Resource</Filter>
     </ClInclude>
     <ClInclude Include="Engine\ResourceManager.h">
-      <Filter>Header Files\Resource</Filter>
+      <Filter>Resource</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Debugger.h">
-      <Filter>Header Files\Debug</Filter>
+      <Filter>Debug</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Header.h">
       <Filter>Header Files</Filter>
@@ -117,16 +117,16 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\DrawManager.h">
-      <Filter>Header Files\Render2D</Filter>
+      <Filter>Render2D</Filter>
     </ClInclude>
     <ClInclude Include="Engine\DrawObject.h">
-      <Filter>Header Files\Render2D</Filter>
+      <Filter>Render2D</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Scene.h">
-      <Filter>Header Files\Stage</Filter>
+      <Filter>Stage</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Time.h">
-      <Filter>Header Files\Time</Filter>
+      <Filter>Time</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

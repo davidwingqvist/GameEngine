@@ -1,4 +1,5 @@
 #include "Header.h"
+#define NOMINMAX 0
 #include "Engine.h"
 #pragma comment(lib, "d2d1.lib")
 #define STB_IMAGE_IMPLEMENTATION
