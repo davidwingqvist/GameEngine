@@ -45,10 +45,14 @@ private:
 
 	bool CreateIndexBuffer(std::vector<UINT>& indices);
 
+	void LoadBufferData(const aiScene* scene, const std::string& filename);
+
 public:
 
 	Model3D();
 	~Model3D();
+
+	void Draw();
 
 	// Inherited via IResource
 	virtual bool Create(const std::string& filename) override;

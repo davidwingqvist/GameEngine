@@ -70,48 +70,8 @@ bool Model3D::CreateIndexBuffer(std::vector<UINT>& indices)
     return !FAILED(hr);
 }
 
-Model3D::Model3D()
+void Model3D::LoadBufferData(const aiScene* scene, const std::string& filename)
 {
-
-}
-
-Model3D::~Model3D()
-{
-    if (vertexBuffer)
-        vertexBuffer->Release();
-    if (indexBuffer)
-        indexBuffer->Release();
-}
-
-bool Model3D::Create(const std::string& filename)
-{
-    Assimp::Importer importer;
-
-    const aiScene* scene = importer.ReadFile
-    (
-        MODELPATH + filename,
-        aiProcess_Triangulate |   //Triangulate every surface
-        aiProcess_JoinIdenticalVertices |   //Ignores identical veritices - memory saving  
-        aiProcess_FlipWindingOrder |   //Makes it clockwise order
-        aiProcess_MakeLeftHanded |	//Use a lefthanded system for the models 
-        aiProcess_CalcTangentSpace |   //Fix tangents and bitangents automatic for us
-        aiProcess_FlipUVs |   //Flips the textures to fit directX-style
-        aiProcess_LimitBoneWeights 		    //Limits by default to 4 weights per vertex
-    );
-
-    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
-    {
-        Debugger::Get().Print("Assimp couldnt open: '" + filename + "'\n", Debugger::COLOR_RED);
-        importer.FreeScene();
-        return false;
-    }
-
-    if (!scene->HasMeshes())
-    {
-        DEBUG_ERROR("Model has no meshes.\n");
-        return false;
-    }
-
     UINT indexOffset = 0;
     UINT localMaxIndex = 0;
     std::vector<model_data> data;
@@ -147,10 +107,65 @@ bool Model3D::Create(const std::string& filename)
 
     if (!this->CreateVertexBuffer(data))
         DEBUG_ERROR("Couldnt create vertex buffer for model: '" + filename + "'\n");
-    if(!this->CreateIndexBuffer(indices))
+    if (!this->CreateIndexBuffer(indices))
         DEBUG_ERROR("Couldnt create index buffer for model: '" + filename + "'\n");
 
+}
 
+Model3D::Model3D()
+{
+
+}
+
+Model3D::~Model3D()
+{
+    if (vertexBuffer)
+        vertexBuffer->Release();
+    if (indexBuffer)
+        indexBuffer->Release();
+}
+
+void Model3D::Draw()
+{
+    UINT offset = 0;
+    UINT stride = sizeof(model_data);
+
+    D3D11Core::Get().Context()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    D3D11Core::Get().Context()->IASetVertexBuffers(0, 1, &this->vertexBuffer, &stride, &offset);
+    D3D11Core::Get().Context()->IASetIndexBuffer(this->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+    D3D11Core::Get().Context()->DrawIndexed(this->indexCount, 0, 0);
+}
+
+bool Model3D::Create(const std::string& filename)
+{
+    Assimp::Importer importer;
+
+    const aiScene* scene = importer.ReadFile
+    (
+        MODELPATH + filename,
+        aiProcess_Triangulate |   //Triangulate every surface
+        aiProcess_JoinIdenticalVertices |   //Ignores identical veritices - memory saving  
+        aiProcess_FlipWindingOrder |   //Makes it clockwise order
+        aiProcess_MakeLeftHanded |	//Use a lefthanded system for the models 
+        aiProcess_CalcTangentSpace |   //Fix tangents and bitangents automatic for us
+        aiProcess_FlipUVs |   //Flips the textures to fit directX-style
+        aiProcess_LimitBoneWeights 		    //Limits by default to 4 weights per vertex
+    );
+
+    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+    {
+        Debugger::Get().Print("Assimp couldnt open: '" + filename + "'\n", Debugger::COLOR_RED);
+        importer.FreeScene();
+        return false;
+    }
+
+    if (!scene->HasMeshes())
+    {
+        DEBUG_ERROR("Model: '" + filename  + "' has no meshes.\n");
+        return false;
+    }
+
+    this->LoadBufferData(scene, filename);
 
     importer.FreeScene();
 
