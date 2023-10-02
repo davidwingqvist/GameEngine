@@ -40,6 +40,7 @@ inline std::shared_ptr<T> ResourceManager::GetResource(const std::string & filen
 		if (resource->Create(filename))
 		{
 			Debugger::Get().Print("Resource: '" + filename + "' created.\n", Debugger::COLOR_GREEN);
+			DEBUG_INFO("Total amount of Resources: " + std::to_string(m_resources.size() + 1) + "\n")
 			m_resources.emplace(filename, resource);
 
 			return std::shared_ptr<T>(resource);

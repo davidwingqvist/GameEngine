@@ -7,9 +7,12 @@ void PipelineManager::Initialize()
 {
     if (!this->CreateRenderTargetView())
         Debugger::Get().Print("Couldnt create RenderTargetView!\n", Debugger::COLOR_RED);
-    this->CreateDepthStencilStates();
-    this->CreateRasterizerStates();
-    this->CreateSamplerStates();
+    if (!this->CreateDepthStencilStates())
+        DEBUG_ERROR("Couldnt create Depth Stencil States\n")
+    if (!this->CreateRasterizerStates())
+        DEBUG_ERROR("Couldnt create Rasterizer State\n")
+    if (!this->CreateSamplerStates())
+        DEBUG_ERROR("Couldnt create Sampler states\n")
     this->SetViewport();
 }
 

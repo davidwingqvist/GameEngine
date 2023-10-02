@@ -19,8 +19,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 
 #endif
-	Engine engine;
+	Engine engine("peeky.jpg");
 
+	engine.Build();
 	engine.Start();
 
 #if _DEBUG

@@ -34,6 +34,9 @@
     <Filter Include="Time">
       <UniqueIdentifier>{94f55ca1-2c7e-447d-86b8-2d73211bbfbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render\Renderpass">
+      <UniqueIdentifier>{6054124c-f9b8-4657-8bf3-06bf735d8834}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Engine.cpp">
@@ -81,6 +84,12 @@
     <ClCompile Include="Engine\Time.cpp">
       <Filter>Time</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Renderpass.cpp">
+      <Filter>Render\Renderpass</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Renderer.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h">
@@ -127,6 +136,12 @@
     </ClInclude>
     <ClInclude Include="Engine\Time.h">
       <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Renderpass.h">
+      <Filter>Render\Renderpass</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Renderer.h">
+      <Filter>Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

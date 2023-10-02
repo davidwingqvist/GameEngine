@@ -18,15 +18,20 @@ Engine::Engine()
 	D3D11Core::Get().Initialize(&m_window);
 	D2D1Core::Get().Initialize();
 
-	this->m_pipelineManager.Initialize();
+	this->m_renderer.Initialize();
 
 
 	this->AddScene("Test");
 	this->SetScene("Test");
 
 	ResourceManager::Get().GetResource<Model3D>("Villager.fbx");
-	
-	this->SetSplashScreen("peeky.jpg");
+	DEBUG_INFO("The basics of the Engine is now up and running.\n");
+}
+
+Engine::Engine(const std::string& splashScreen)
+	:Engine()
+{
+	this->SetSplashScreen(splashScreen);
 }
 
 Engine::~Engine()
@@ -53,7 +58,7 @@ void Engine::Update()
 
 void Engine::Draw()
 {
-	m_pipelineManager.ClearScreen();
+	this->m_renderer.GetPipelineManager().ClearScreen();
 
 	D2D1Core::Get().Begin();
 
@@ -63,6 +68,10 @@ void Engine::Draw()
 	D2D1Core::Get().Commit();
 
 	D3D11Core::Get().Present();
+}
+
+void Engine::Build()
+{
 }
 
 void Engine::Start()
@@ -108,7 +117,7 @@ void Engine::SetSplashScreen(const std::string& fileName)
 
 	Image2D* image = ResourceManager::Get().GetResource<Image2D>(fileName).get();
 
-	m_pipelineManager.ClearScreen();
+	this->m_renderer.GetPipelineManager().ClearScreen();
 	D2D1Core::Get().Begin();
 	D2D1Core::Get().DrawP(splash, image->GetImage());
 	D2D1Core::Get().Commit();

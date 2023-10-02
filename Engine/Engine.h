@@ -1,18 +1,18 @@
 #pragma once
 #include "D3D11Context.h"
 #include "Direct2DContext.h"
-#include "PipelineManager.h"
 #include "Debugger.h"
 #include "ResourceManager.h"
 #include "Scene.h"
 #include "Time.h"
+#include "Renderer.h"
 
 class Engine
 {
 private:
 
 	Window m_window;
-	PipelineManager m_pipelineManager;
+	Renderer m_renderer;
 	bool shutdown = false;
 
 	std::unordered_map<std::string, Scene> m_scenes;
@@ -25,7 +25,11 @@ private:
 public:
 
 	Engine();
+	Engine(const std::string& splashScreen);
 	~Engine();
+
+	// Run this function to build the engine.
+	void Build();
 
 	/*
 	
