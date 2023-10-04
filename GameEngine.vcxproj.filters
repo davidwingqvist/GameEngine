@@ -90,6 +90,9 @@
     <ClCompile Include="Engine\Renderer.cpp">
       <Filter>Render</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\SceneManager.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h">
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Renderer.h">
       <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\SceneManager.h">
+      <Filter>Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

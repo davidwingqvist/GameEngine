@@ -20,9 +20,8 @@ Engine::Engine()
 
 	this->m_renderer.Initialize();
 
-
-	this->AddScene("Test");
-	this->SetScene("Test");
+	m_sceneManager.AddScene("Test");
+	m_sceneManager.SetScene("Test");
 
 	ResourceManager::Get().GetResource<Model3D>("Villager.fbx");
 	DEBUG_INFO("The basics of the Engine is now up and running.\n");
@@ -52,8 +51,8 @@ void Engine::Update()
 		}
 	}
 
-	if (m_currentScene)
-		m_currentScene->Update();
+	if (m_sceneManager.GetCurrentScene())
+		m_sceneManager.GetCurrentScene()->Update();
 }
 
 void Engine::Draw()
@@ -62,8 +61,7 @@ void Engine::Draw()
 
 	D2D1Core::Get().Begin();
 
-	if (m_currentScene)
-		m_currentScene->Draw();
+	m_renderer.Draw(m_sceneManager.GetCurrentScene());
 
 	D2D1Core::Get().Commit();
 
@@ -85,30 +83,6 @@ void Engine::Start()
 
 		Time::Get().SetDeltaTime(std::chrono::duration<float, std::milli>(end - start).count());
 	}
-}
-
-void Engine::AddScene(const std::string& sceneName)
-{
-	Scene newScene;
-	m_scenes.emplace(sceneName, newScene);
-	Debugger::Get().Print("Added Scene: '" + sceneName + "'\n", Debugger::COLOR_GREEN);
-}
-
-void Engine::SetScene(const std::string& sceneName)
-{
-	if (m_scenes.find(sceneName) == m_scenes.end())
-	{
-		Debugger::Get().Print("No scene with the name: '" + sceneName + "' found.\n", Debugger::COLOR_RED);
-		return;
-	}
-
-	Debugger::Get().Print("Scene set to: '" + sceneName + "'\n", Debugger::COLOR_GREEN);
-	m_currentScene = &m_scenes[sceneName];
-}
-
-Scene* Engine::GetScene(const std::string& sceneName)
-{
-	return &m_scenes[sceneName];
 }
 
 void Engine::SetSplashScreen(const std::string& fileName)

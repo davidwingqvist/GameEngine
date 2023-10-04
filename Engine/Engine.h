@@ -3,7 +3,7 @@
 #include "Direct2DContext.h"
 #include "Debugger.h"
 #include "ResourceManager.h"
-#include "Scene.h"
+#include "SceneManager.h"
 #include "Time.h"
 #include "Renderer.h"
 
@@ -14,9 +14,7 @@ private:
 	Window m_window;
 	Renderer m_renderer;
 	bool shutdown = false;
-
-	std::unordered_map<std::string, Scene> m_scenes;
-	Scene* m_currentScene = nullptr;
+	SceneManager m_sceneManager;
 
 
 	void Update();
@@ -37,10 +35,6 @@ public:
 	
 	*/
 	void Start();
-
-	void AddScene(const std::string& sceneName);
-	void SetScene(const std::string& sceneName);
-	Scene* GetScene(const std::string& sceneName);
 
 	void SetSplashScreen(const std::string& fileName);
 

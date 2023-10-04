@@ -1,5 +1,7 @@
 #pragma once
 
+class Model3D;
+
 struct object2D
 {
 	float x;
@@ -32,11 +34,6 @@ struct object2D
 	}
 };
 
-struct position
-{
-	sm::Vector3 position;
-};
-
 struct model_data
 {
 	float x = 0.0f;
@@ -47,4 +44,5 @@ struct model_data
 struct model
 {
 	sm::Matrix worldMatrix;
+	std::shared_ptr<Model3D> data;
 };

@@ -9,10 +9,10 @@ private:
 	std::vector<recs::Entity> m_entities;
 	std::function<void(recs::recs_registry&)> m_function;
 	DrawManager m_drawManager;
+	//dx::ConstantBuffer<sm::Matrix> m_objectBuffer;
 
 public:
 
-	Scene(recs::recs_registry* registry);
 	Scene();
 	~Scene();
 
