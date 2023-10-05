@@ -4,14 +4,26 @@
 #include "Resource.h"
 #include "Debugger.h"
 
+void UpdatePublicBuffer(ID3D11Buffer* buffer, const sm::Matrix& matrix_data)
+{
+
+}
 
 Scene::Scene()
 {
-	//m_objectBuffer.Create(D3D11Core::Get().Device());
+	m_publicBuffer = nullptr;
+	this->CreatePublicBuffer();
 }
 
 Scene::~Scene()
 {
+	if (m_publicBuffer)
+		m_publicBuffer->Release();
+}
+
+void Scene::CreatePublicBuffer()
+{
+
 }
 
 void Scene::SetLogic(std::function<void(recs::recs_registry&)> function)
@@ -29,7 +41,7 @@ void Scene::Draw()
 {
 	m_registry.View<model>().ForEach([&](model& model){
 
-		//m_objectBuffer.SetData(D3D11Core::Get().Context(), model.worldMatrix);
+		UpdatePublicBuffer(m_publicBuffer, model.worldMatrix);
 
 		// draw each model.
 		model.data->Draw();

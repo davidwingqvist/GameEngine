@@ -4,7 +4,7 @@
 
 SceneManager::SceneManager()
 {
-
+	m_currentScene = nullptr;
 }
 
 SceneManager::~SceneManager()
@@ -15,7 +15,7 @@ SceneManager::~SceneManager()
 void SceneManager::AddScene(const std::string& sceneName)
 {
 	Scene newScene;
-	m_scenes.emplace(sceneName, newScene);
+	m_scenes.insert_or_assign(sceneName, newScene);
 	Debugger::Get().Print("Added Scene: '" + sceneName + "'\n", Debugger::COLOR_GREEN);
 }
 
