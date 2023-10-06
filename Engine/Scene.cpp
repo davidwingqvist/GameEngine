@@ -6,24 +6,42 @@
 
 void UpdatePublicBuffer(ID3D11Buffer* buffer, const sm::Matrix& matrix_data)
 {
+	D3D11_MAPPED_SUBRESOURCE sub;
+	HRESULT hr = D3D11Core::Get().Context()->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, NULL, &sub);
+	if (FAILED(hr))
+	{
+		DEBUG_ERROR("Failed to map public buffer for scene!\n");
+	}
+	std::memcpy(sub.pData, &matrix_data, sizeof(matrix_data));
+	D3D11Core::Get().Context()->Unmap(buffer, 0);
 
 }
 
 Scene::Scene()
 {
 	m_publicBuffer = nullptr;
-	this->CreatePublicBuffer();
+	if (!this->CreatePublicBuffer())
+		DEBUG_ERROR("Creating public buffer failed for scene!\n")
+
+	UpdatePublicBuffer(m_publicBuffer, sm::Matrix());
 }
 
 Scene::~Scene()
 {
-	if (m_publicBuffer)
+	if (m_publicBuffer != nullptr)
 		m_publicBuffer->Release();
 }
 
-void Scene::CreatePublicBuffer()
+bool Scene::CreatePublicBuffer()
 {
+	D3D11_BUFFER_DESC desc;
+	desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
+	desc.ByteWidth = sizeof(sm::Matrix);
+	desc.Usage = D3D11_USAGE_DYNAMIC;
+	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	desc.MiscFlags = 0;
 
+	return !FAILED(D3D11Core::Get().Device()->CreateBuffer(&desc, NULL, &m_publicBuffer));
 }
 
 void Scene::SetLogic(std::function<void(recs::recs_registry&)> function)

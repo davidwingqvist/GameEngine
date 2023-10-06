@@ -11,7 +11,7 @@ private:
 	DrawManager m_drawManager;
 	ID3D11Buffer* m_publicBuffer;
 
-	void CreatePublicBuffer();
+	bool CreatePublicBuffer();
 
 public:
 
