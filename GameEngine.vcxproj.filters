@@ -37,6 +37,9 @@
     <Filter Include="Render\Renderpass">
       <UniqueIdentifier>{6054124c-f9b8-4657-8bf3-06bf735d8834}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{b7f3a3a3-5b61-49f3-97d0-61e4e1252549}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Engine.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="Engine\SceneManager.cpp">
       <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\BasicPass.cpp">
+      <Filter>Render\Renderpass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,8 +155,19 @@
     <ClInclude Include="Engine\SceneManager.h">
       <Filter>Stage</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\BasicPass.h">
+      <Filter>Render\Renderpass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Engine\BasicVertexShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Engine\BasicPixelShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

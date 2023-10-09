@@ -12,6 +12,7 @@ private:
 	ID3D11Buffer* m_publicBuffer;
 
 	bool CreatePublicBuffer();
+	void PreDraw();
 
 public:
 

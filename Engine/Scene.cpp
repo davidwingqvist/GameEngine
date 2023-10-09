@@ -55,8 +55,15 @@ void Scene::Update()
 		m_function(m_registry);
 }
 
+void Scene::PreDraw()
+{
+	// Public buffer is set to the first slot in Vertex Shader
+	D3D11Core::Get().Context()->VSSetConstantBuffers(0, 1, &m_publicBuffer);
+}
+
 void Scene::Draw()
 {
+	this->PreDraw();
 	m_registry.View<model>().ForEach([&](model& model){
 
 		UpdatePublicBuffer(m_publicBuffer, model.worldMatrix);
