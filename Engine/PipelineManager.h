@@ -1,10 +1,11 @@
 #pragma once
 #include <d3d11.h>
 #include "Window.h"
+#include "Shader.h"
 
 class PipelineManager
 {
-private:
+public:
 
 	ID3D11RenderTargetView* m_backBuffer;
 	ID3D11UnorderedAccessView* m_backBufferAccessView;
@@ -21,6 +22,11 @@ private:
 	D3D11_VIEWPORT m_viewport;
 	UINT m_windowWidth = 0;
 	UINT m_windowHeight = 0;
+
+	VertexShader m_baseVertexShader;
+	PixelShader m_basePixelShader;
+
+private:
 
 	bool CreateRenderTargetView();
 	bool CreateDepthStencilStates();

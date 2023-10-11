@@ -13,6 +13,10 @@ void PipelineManager::Initialize()
         DEBUG_ERROR("Couldnt create Rasterizer State\n")
     if (!this->CreateSamplerStates())
         DEBUG_ERROR("Couldnt create Sampler states\n")
+    if(!this->CreateShaders())
+        DEBUG_ERROR("Couldnt create shaders!\n")
+    if(!this->CreateInputLayouts())
+        DEBUG_ERROR("Couldnt create Input Layout\n")
     this->SetViewport();
 }
 
@@ -262,12 +266,33 @@ bool PipelineManager::CreateBlendStates()
 
 bool PipelineManager::CreateShaders()
 {
-	return false;
+    if (!m_basePixelShader.Create("BasicPixelShader"))
+        DEBUG_ERROR("Couldnt create BasicPixelShader!\n")
+    if (!m_baseVertexShader.Create("BasicVertexShader"))
+        DEBUG_ERROR("Couldnt create BasicVertexShader!\n")
+
+	return true;
 }
 
 bool PipelineManager::CreateInputLayouts()
 {
-	return false;
+    HRESULT hr = S_FALSE;
+
+    // Create m_defaultInputLayout.
+    std::string shaderByteCode = m_baseVertexShader.GetShaderByteCode();
+    D3D11_INPUT_ELEMENT_DESC defaultVertexShaderDesc[] =
+    {
+        {"POSITION",    0, DXGI_FORMAT_R32G32B32_FLOAT,    0,                0,                   D3D11_INPUT_PER_VERTEX_DATA, 0},
+        {"TEXCOORD",    0, DXGI_FORMAT_R32G32_FLOAT,       0,    D3D11_APPEND_ALIGNED_ELEMENT,    D3D11_INPUT_PER_VERTEX_DATA, 0}
+    };
+
+    if (FAILED(hr = D3D11Core::Get().Device()->CreateInputLayout(defaultVertexShaderDesc, ARRAYSIZE(defaultVertexShaderDesc), shaderByteCode.c_str(), shaderByteCode.length(), &m_defaultInputLayout)))
+    {
+        DEBUG_ERROR("failed creating m_defaultInputLayout.\n");
+        return false;
+    }
+
+    return !FAILED(hr);
 }
 
 void PipelineManager::SetViewport()

@@ -3,17 +3,22 @@
 #include <sstream>
 #include <fstream>
 #include "D3D11Context.h"
+#include "Debugger.h"
+
+// Fix this later, start path is different from Solution and actual application.
+const std::string csoPATH = "x64/Debug/";
 
 bool IShader::LoadShaderDataFromFile(const std::string& filename)
 {
     m_filename = filename;
 
     std::ifstream reader;
+
     std::string shaderData;
-    reader.open(filename + ".cso", std::ios::binary | std::ios::ate);
+    reader.open(csoPATH + filename + ".cso", std::ios::binary | std::ios::ate);
     if (!reader.is_open())
     {
-        //LOG_WARNING("failed to open %s.cso", filename.c_str());
+        DEBUG_ERROR("Failed to open " + filename + ".cso\n");
         return false;
     }
     reader.seekg(0, std::ios::end);

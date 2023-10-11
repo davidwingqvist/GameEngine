@@ -1,8 +1,11 @@
 #include "Header.h"
 #include "Renderer.h"
+#include "BasicPass.h"
 
 Renderer::Renderer()
 {
+	BasicPass basicPass(&m_pipelineManager);
+	m_renderPasses.push_back(&basicPass);
 }
 
 Renderer::~Renderer()

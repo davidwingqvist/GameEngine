@@ -6,12 +6,12 @@ class BasicPass : public IRenderpass
 {
 private:
 
-	PixelShader m_pixelShader;
-	VertexShader m_vertexShader;
+
 
 public:
 
-	BasicPass();
+
+	BasicPass(PipelineManager* pipe);
 	virtual ~BasicPass() override;
 
 	virtual void Prepass() override;
