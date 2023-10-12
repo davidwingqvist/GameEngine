@@ -106,11 +106,17 @@ HRESULT D2D1Core::LoadBitMap(const LPCWSTR& filePath, ID2D1Bitmap** bitMap)
 bool D2D1Core::Initialize()
 {
 	D2D1_FACTORY_OPTIONS options = {};
+#ifdef _DEBUG
+	options.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;
+#endif
 
 	// Create a factory for D2D1, if it fails we LOG_ERROR and return false.
 	HRESULT hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_MULTI_THREADED, options, &m_factory);
 	if (FAILED(hr))
+	{
+		DEBUG_ERROR("Creating D2D1Core factory failed!\n")
 		return false;
+	}
 
 	D3D11Core::Get().SwapChain()->GetBuffer(0, IID_PPV_ARGS(&m_surface));
 
@@ -126,7 +132,10 @@ bool D2D1Core::Initialize()
 	// Create a render target for the surface we created with D3D11 swapchain.
 	hr = m_factory->CreateDxgiSurfaceRenderTarget(m_surface, props, &m_renderTarget);
 	if (FAILED(hr))
+	{
+		DEBUG_ERROR("Failed creating dxgi surface render target!\n")
 		return false;
+	}
 
 	RECT rc;
 	GetClientRect(D3D11Core::Get().GetWindow()->GetHWnd(), &rc);
@@ -138,7 +147,10 @@ bool D2D1Core::Initialize()
 		&m_hwndTarget);
 
 	if (FAILED(hr))
+	{
+		DEBUG_ERROR("Failed creating Hwnd render target!\n")
 		return false;
+	}
 
 	hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
 
@@ -148,12 +160,18 @@ bool D2D1Core::Initialize()
 		IID_PPV_ARGS(&m_imageFactory));
 
 	if (FAILED(hr))
+	{
+		DEBUG_ERROR("Failed create Co-instance!\n")
 		return false;
+	}
 
 	// Setup a default solid color brush to be used when rendering.
 	hr = m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(1.0f, 1.0f, 1.0f), &m_solidBrush);
 	if (FAILED(hr))
+	{
+		DEBUG_ERROR("Failed to create default solid color brush!\n")
 		return false;
+	}
 
 
 	return true;

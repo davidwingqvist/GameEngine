@@ -141,6 +141,7 @@
     <PublicIncludeDirectories>RECS.lib;$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <ExternalIncludePath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;$(ExternalIncludePath)</ExternalIncludePath>
     <ReferencePath>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;$(ReferencePath)</ReferencePath>
+    <OutDir>$(SolutionDir)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
@@ -222,7 +223,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc143-mtd.lib;d3d11.lib;%(AdditionalDependencies);d3d11.lib</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc143-mtd.lib;d3d11.lib;d2d1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\assimp;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Lib;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;C:\Users\Main\Desktop\Game Ground\GameEngine\ThirdParty\RECS\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference>
