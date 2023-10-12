@@ -1,22 +1,15 @@
 #include "Header.h"
 #include "Renderer.h"
-#include "BasicPass.h"
+
 
 Renderer::Renderer()
+	:m_basicPass(&m_pipelineManager)
 {
-	BasicPass basicPass(&m_pipelineManager);
-	m_renderPasses.push_back(&basicPass);
+	m_renderPasses.push_back(&m_basicPass);
 }
 
 Renderer::~Renderer()
 {
-	for (int i = 0; i < m_renderPasses.size(); i++)
-	{
-		if (m_renderPasses[i])
-		{
-			delete m_renderPasses[i];
-		}
-	}
 }
 
 void Renderer::Initialize()

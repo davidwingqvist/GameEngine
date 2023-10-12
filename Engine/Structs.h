@@ -34,6 +34,18 @@ struct object2D
 	}
 };
 
+struct transform
+{
+	sm::Vector3 pos;
+	sm::Vector3 rotation;
+	sm::Vector3 scale;
+
+	sm::Matrix GetMatrix()
+	{
+		return sm::Matrix::CreateWorld(pos, pos.Forward, sm::Vector3(0, 1, 0));
+	}
+};
+
 struct model_data
 {
 	float x = 0.0f;
@@ -43,6 +55,5 @@ struct model_data
 
 struct model
 {
-	sm::Matrix worldMatrix;
-	std::shared_ptr<Model3D> data;
+	Model3D* data;
 };

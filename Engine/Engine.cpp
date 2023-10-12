@@ -21,9 +21,8 @@ Engine::Engine()
 	this->m_renderer.Initialize();
 
 	m_sceneManager.AddScene("Test");
-	m_sceneManager.SetScene("Test");
+	//m_sceneManager.SetScene("Test");
 
-	ResourceManager::Get().GetResource<Model3D>("Villager.fbx");
 	DEBUG_INFO("The basics of the Engine is now up and running.\n");
 }
 
