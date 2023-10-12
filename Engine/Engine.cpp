@@ -69,10 +69,12 @@ void Engine::Draw()
 
 void Engine::Build()
 {
+
 }
 
 void Engine::Start()
 {
+
 	while (!shutdown)
 	{
 		auto start = std::chrono::high_resolution_clock::now();
