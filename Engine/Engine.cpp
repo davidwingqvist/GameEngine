@@ -58,11 +58,11 @@ void Engine::Draw()
 {
 	this->m_renderer.GetPipelineManager().ClearScreen();
 
-	D2D1Core::Get().Begin();
+	//D2D1Core::Get().Begin();
 
 	m_renderer.Draw(m_sceneManager.GetCurrentScene());
 
-	D2D1Core::Get().Commit();
+	//D2D1Core::Get().Commit();
 
 	D3D11Core::Get().Present();
 }
@@ -88,15 +88,16 @@ void Engine::Start()
 
 void Engine::SetSplashScreen(const std::string& fileName)
 {
+	
 	object2D splash(0,0, D3D11Core::Get().GetWindow()->GetWidth(), D3D11Core::Get().GetWindow()->GetHeight());
-
-	Image2D* image = ResourceManager::Get().GetResource<Image2D>(fileName).get();
+	
+	//Image2D* image = ResourceManager::Get().GetResource<Image2D>(fileName).get();
 
 	this->m_renderer.GetPipelineManager().ClearScreen();
-	D2D1Core::Get().Begin();
-	D2D1Core::Get().DrawP(splash, image->GetImage());
-	D2D1Core::Get().Commit();
-	D3D11Core::Get().Present();
+	//D2D1Core::Get().Begin();
+	//D2D1Core::Get().DrawP(splash, image->GetImage());
+	//D2D1Core::Get().Commit();
+	//D3D11Core::Get().Present();
 }
 
 void Engine::Shutdown()

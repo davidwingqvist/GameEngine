@@ -2,6 +2,7 @@
 #include "Direct2DContext.h"
 #include "D3D11Context.h"
 #include <assert.h>
+#include "Debugger.h"
 
 
 
@@ -215,7 +216,8 @@ const bool D2D1Core::CreateImage(const std::string& filename, ID2D1Bitmap** poin
 
 	HRESULT hr = LoadBitMap(pwcsName, pointer);
 
-	//assert(FAILED(hr) && "FAILED LOADING IMAGE!");
+	if(FAILED(hr))
+		DEBUG_ERROR("Couldnt open '" + filename + "' image!\n")
 
 	delete[] pwcsName;
 	return (SUCCEEDED(hr));
