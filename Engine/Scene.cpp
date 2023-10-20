@@ -25,9 +25,9 @@ Scene::Scene()
 
 	recs::Entity ent = m_registry.CreateEntity();
 	transform* transf = m_registry.AddComponent<transform>(ent);
-	m_registry.AddComponent<model>(ent)->data = ResourceManager::Get().GetResource<Model3D>("Villager.fbx").get();
+	m_registry.AddComponent<model>(ent)->data = ResourceManager::Get().GetResource<Model3D>("Chest.obj").get();
 
-	//transf->pos = { 1, 0, 25 };
+	transf->pos = { 1, 0, 25 };
 	//UpdatePublicBuffer(m_publicBuffer, transf->GetMatrix());
 }
 

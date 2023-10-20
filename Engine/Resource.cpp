@@ -25,13 +25,13 @@ bool Image2D::Create(const std::string& filename)
     return D2D1Core::Get().CreateImage(filename, &m_image);
 }
 
-bool Model3D::CreateVertexBuffer(std::vector<model_data>& modelData)
+bool Model3D::CreateVertexBuffer(std::vector<vertex_data>& modelData)
 {
     if (modelData.empty())
         return false;
 
     D3D11_BUFFER_DESC desc = {};
-    desc.ByteWidth = static_cast<UINT>(sizeof(model_data) * modelData.size());
+    desc.ByteWidth = static_cast<UINT>(sizeof(vertex_data) * modelData.size());
     desc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
     desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
     desc.CPUAccessFlags = 0;
@@ -74,17 +74,19 @@ void Model3D::LoadBufferData(const aiScene* scene, const std::string& filename)
 {
     UINT indexOffset = 0;
     UINT localMaxIndex = 0;
-    std::vector<model_data> data;
+    std::vector<vertex_data> data;
     std::vector<UINT> indices;
     for (int i = 0; i < scene->mNumMeshes; i++)
     {
         const aiMesh* mesh = scene->mMeshes[i];
         for (int j = 0; j < mesh->mNumVertices; j++)
         {
-            model_data mData;
+            vertex_data mData;
             mData.x = mesh->mVertices->x;
             mData.y = mesh->mVertices->y;
             mData.z = mesh->mVertices->z;
+            mData.u = mesh->mNumUVComponents[0];
+            mData.v = mesh->mNumUVComponents[1];
             data.push_back(mData);
         }
 
@@ -128,7 +130,7 @@ Model3D::~Model3D()
 void Model3D::Draw()
 {
     UINT offset = 0;
-    UINT stride = sizeof(model_data);
+    UINT stride = sizeof(vertex_data);
 
     D3D11Core::Get().Context()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     D3D11Core::Get().Context()->IASetVertexBuffers(0, 1, &this->vertexBuffer, &stride, &offset);

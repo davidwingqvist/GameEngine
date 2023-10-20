@@ -30,7 +30,7 @@ Engine::Engine()
 Engine::Engine(const std::string& splashScreen)
 	:Engine()
 {
-	this->SetSplashScreen(splashScreen);
+	//this->SetSplashScreen(splashScreen);
 }
 
 Engine::~Engine()
@@ -59,11 +59,11 @@ void Engine::Draw()
 {
 	this->m_renderer.GetPipelineManager().ClearScreen();
 
-	D2D1Core::Get().Begin();
+	//D2D1Core::Get().Begin();
 
 	m_renderer.Draw(m_sceneManager.GetCurrentScene());
 
-	D2D1Core::Get().Commit();
+	//D2D1Core::Get().Commit();
 
 	D3D11Core::Get().Present();
 }
