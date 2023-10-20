@@ -27,7 +27,7 @@ Scene::Scene()
 	transform* transf = m_registry.AddComponent<transform>(ent);
 	m_registry.AddComponent<model>(ent)->data = ResourceManager::Get().GetResource<Model3D>("Chest.obj").get();
 
-	transf->pos = { 1, 0, 25 };
+	transf->pos = { 5, 3.5, 25.5 };
 	//UpdatePublicBuffer(m_publicBuffer, transf->GetMatrix());
 }
 

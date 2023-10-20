@@ -25,7 +25,7 @@ bool Image2D::Create(const std::string& filename)
     return D2D1Core::Get().CreateImage(filename, &m_image);
 }
 
-bool Model3D::CreateVertexBuffer(std::vector<vertex_data>& modelData)
+bool Model3D::CreateVertexBuffer(std::vector<vertex_data>& modelData, submesh& mesh)
 {
     if (modelData.empty())
         return false;
@@ -43,12 +43,12 @@ bool Model3D::CreateVertexBuffer(std::vector<vertex_data>& modelData)
     data.SysMemPitch = 0;
     data.SysMemSlicePitch = 0;
 
-    this->vertexCount = static_cast<UINT>(modelData.size());
-    HRESULT hr = D3D11Core::Get().Device()->CreateBuffer(&desc, &data, &vertexBuffer);
+    mesh.vertexCount = static_cast<UINT>(modelData.size());
+    HRESULT hr = D3D11Core::Get().Device()->CreateBuffer(&desc, &data, &mesh.vertexBuffer);
     return !FAILED(hr);
 }
 
-bool Model3D::CreateIndexBuffer(std::vector<UINT>& indices)
+bool Model3D::CreateIndexBuffer(std::vector<UINT>& indices, submesh& mesh)
 {
     if (indices.empty())
         return false;
@@ -65,8 +65,8 @@ bool Model3D::CreateIndexBuffer(std::vector<UINT>& indices)
     data.SysMemPitch = 0;
     data.SysMemSlicePitch = 0;
 
-    this->indexCount = static_cast<UINT>(indices.size());
-    HRESULT hr = D3D11Core::Get().Device()->CreateBuffer(&desc, &data, &indexBuffer);
+    mesh.indexCount = static_cast<UINT>(indices.size());
+    HRESULT hr = D3D11Core::Get().Device()->CreateBuffer(&desc, &data, &mesh.indexBuffer);
     return !FAILED(hr);
 }
 
@@ -105,12 +105,20 @@ void Model3D::LoadBufferData(const aiScene* scene, const std::string& filename)
                 }
             }
         }
+
+        indexOffset += localMaxIndex + 1;
+
+        submesh newMesh{};
+
+        if (!this->CreateVertexBuffer(data, newMesh))
+            DEBUG_ERROR("Couldnt create vertex buffer for model: '" + filename + "'\n");
+        if (!this->CreateIndexBuffer(indices, newMesh))
+            DEBUG_ERROR("Couldnt create index buffer for model: '" + filename + "'\n");
+
+        m_meshes.push_back(newMesh);
     }
 
-    if (!this->CreateVertexBuffer(data))
-        DEBUG_ERROR("Couldnt create vertex buffer for model: '" + filename + "'\n");
-    if (!this->CreateIndexBuffer(indices))
-        DEBUG_ERROR("Couldnt create index buffer for model: '" + filename + "'\n");
+
 
 }
 
@@ -121,10 +129,7 @@ Model3D::Model3D()
 
 Model3D::~Model3D()
 {
-    if (vertexBuffer)
-        vertexBuffer->Release();
-    if (indexBuffer)
-        indexBuffer->Release();
+
 }
 
 void Model3D::Draw()
@@ -133,9 +138,13 @@ void Model3D::Draw()
     UINT stride = sizeof(vertex_data);
 
     D3D11Core::Get().Context()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    D3D11Core::Get().Context()->IASetVertexBuffers(0, 1, &this->vertexBuffer, &stride, &offset);
-    D3D11Core::Get().Context()->IASetIndexBuffer(this->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
-    D3D11Core::Get().Context()->DrawIndexed(this->indexCount, 0, 0);
+    for (size_t m = 0; m < m_meshes.size(); m++)
+    {
+        D3D11Core::Get().Context()->IASetVertexBuffers(0, 1, &m_meshes[m].vertexBuffer, &stride, &offset);
+        D3D11Core::Get().Context()->IASetIndexBuffer(m_meshes[m].indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+        D3D11Core::Get().Context()->DrawIndexed(m_meshes[m].indexCount, 0, 0);
+    }
+
 }
 
 bool Model3D::Create(const std::string& filename)
