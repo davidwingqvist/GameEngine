@@ -72,24 +72,25 @@ bool Model3D::CreateIndexBuffer(std::vector<UINT>& indices, submesh& mesh)
 
 void Model3D::LoadBufferData(const aiScene* scene, const std::string& filename)
 {
-    UINT indexOffset = 0;
-    UINT localMaxIndex = 0;
     std::vector<vertex_data> data;
     std::vector<UINT> indices;
+    UINT indexOffset = 0;
     for (int i = 0; i < scene->mNumMeshes; i++)
     {
+
         const aiMesh* mesh = scene->mMeshes[i];
-        for (int j = 0; j < mesh->mNumVertices; j++)
+        for (unsigned int j = 0; j < mesh->mNumVertices; j++)
         {
             vertex_data mData;
-            mData.x = mesh->mVertices->x;
-            mData.y = mesh->mVertices->y;
-            mData.z = mesh->mVertices->z;
-            mData.u = mesh->mNumUVComponents[0];
-            mData.v = mesh->mNumUVComponents[1];
+            mData.x = mesh->mVertices[i].x;
+            mData.y = mesh->mVertices[i].y;
+            mData.z = mesh->mVertices[i].z;
+            mData.u = mesh->mTextureCoords[0][i].x;
+            mData.v = mesh->mTextureCoords[0][i].y;
             data.push_back(mData);
         }
 
+        UINT localMaxIndex = 0;
         for (unsigned int f = 0; f < mesh->mNumFaces; f++)
         {
             const aiFace face = mesh->mFaces[f];
@@ -106,18 +107,17 @@ void Model3D::LoadBufferData(const aiScene* scene, const std::string& filename)
             }
         }
 
-        indexOffset += localMaxIndex + 1;
-
-        submesh newMesh{};
-
-        if (!this->CreateVertexBuffer(data, newMesh))
-            DEBUG_ERROR("Couldnt create vertex buffer for model: '" + filename + "'\n");
-        if (!this->CreateIndexBuffer(indices, newMesh))
-            DEBUG_ERROR("Couldnt create index buffer for model: '" + filename + "'\n");
-
-        m_meshes.push_back(newMesh);
+        indexOffset += (localMaxIndex + 1);
     }
 
+    submesh newMesh{};
+
+    if (!this->CreateVertexBuffer(data, newMesh))
+        DEBUG_ERROR("Couldnt create vertex buffer for model: '" + filename + "'\n");
+    if (!this->CreateIndexBuffer(indices, newMesh))
+        DEBUG_ERROR("Couldnt create index buffer for model: '" + filename + "'\n");
+
+    m_meshes.push_back(newMesh);
 
 
 }
@@ -150,6 +150,8 @@ void Model3D::Draw()
 bool Model3D::Create(const std::string& filename)
 {
     Assimp::Importer importer;
+
+    importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_PRESERVE_PIVOTS, false);
 
     const aiScene* scene = importer.ReadFile
     (
