@@ -25,13 +25,13 @@ bool Image2D::Create(const std::string& filename)
     return D2D1Core::Get().CreateImage(filename, &m_image);
 }
 
-bool Model3D::CreateVertexBuffer(std::vector<model_data>& modelData)
+bool Model3D::CreateVertexBuffer(std::vector<vertex_data>& modelData, submesh& mesh)
 {
     if (modelData.empty())
         return false;
 
     D3D11_BUFFER_DESC desc = {};
-    desc.ByteWidth = static_cast<UINT>(sizeof(model_data) * modelData.size());
+    desc.ByteWidth = static_cast<UINT>(sizeof(vertex_data) * modelData.size());
     desc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
     desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
     desc.CPUAccessFlags = 0;
@@ -43,12 +43,12 @@ bool Model3D::CreateVertexBuffer(std::vector<model_data>& modelData)
     data.SysMemPitch = 0;
     data.SysMemSlicePitch = 0;
 
-    this->vertexCount = static_cast<UINT>(modelData.size());
-    HRESULT hr = D3D11Core::Get().Device()->CreateBuffer(&desc, &data, &vertexBuffer);
+    mesh.vertexCount = static_cast<UINT>(modelData.size());
+    HRESULT hr = D3D11Core::Get().Device()->CreateBuffer(&desc, &data, &mesh.vertexBuffer);
     return !FAILED(hr);
 }
 
-bool Model3D::CreateIndexBuffer(std::vector<UINT>& indices)
+bool Model3D::CreateIndexBuffer(std::vector<UINT>& indices, submesh& mesh)
 {
     if (indices.empty())
         return false;
@@ -65,29 +65,32 @@ bool Model3D::CreateIndexBuffer(std::vector<UINT>& indices)
     data.SysMemPitch = 0;
     data.SysMemSlicePitch = 0;
 
-    this->indexCount = static_cast<UINT>(indices.size());
-    HRESULT hr = D3D11Core::Get().Device()->CreateBuffer(&desc, &data, &indexBuffer);
+    mesh.indexCount = static_cast<UINT>(indices.size());
+    HRESULT hr = D3D11Core::Get().Device()->CreateBuffer(&desc, &data, &mesh.indexBuffer);
     return !FAILED(hr);
 }
 
 void Model3D::LoadBufferData(const aiScene* scene, const std::string& filename)
 {
-    UINT indexOffset = 0;
-    UINT localMaxIndex = 0;
-    std::vector<model_data> data;
+    std::vector<vertex_data> data;
     std::vector<UINT> indices;
+    UINT indexOffset = 0;
     for (int i = 0; i < scene->mNumMeshes; i++)
     {
+
         const aiMesh* mesh = scene->mMeshes[i];
-        for (int j = 0; j < mesh->mNumVertices; j++)
+        for (unsigned int j = 0; j < mesh->mNumVertices; j++)
         {
-            model_data mData;
-            mData.x = mesh->mVertices->x;
-            mData.y = mesh->mVertices->y;
-            mData.z = mesh->mVertices->z;
+            vertex_data mData;
+            mData.x = mesh->mVertices[i].x;
+            mData.y = mesh->mVertices[i].y;
+            mData.z = mesh->mVertices[i].z;
+            mData.u = mesh->mTextureCoords[0][i].x;
+            mData.v = mesh->mTextureCoords[0][i].y;
             data.push_back(mData);
         }
 
+        UINT localMaxIndex = 0;
         for (unsigned int f = 0; f < mesh->mNumFaces; f++)
         {
             const aiFace face = mesh->mFaces[f];
@@ -103,12 +106,19 @@ void Model3D::LoadBufferData(const aiScene* scene, const std::string& filename)
                 }
             }
         }
+
+        indexOffset += (localMaxIndex + 1);
     }
 
-    if (!this->CreateVertexBuffer(data))
+    submesh newMesh{};
+
+    if (!this->CreateVertexBuffer(data, newMesh))
         DEBUG_ERROR("Couldnt create vertex buffer for model: '" + filename + "'\n");
-    if (!this->CreateIndexBuffer(indices))
+    if (!this->CreateIndexBuffer(indices, newMesh))
         DEBUG_ERROR("Couldnt create index buffer for model: '" + filename + "'\n");
+
+    m_meshes.push_back(newMesh);
+
 
 }
 
@@ -119,26 +129,29 @@ Model3D::Model3D()
 
 Model3D::~Model3D()
 {
-    if (vertexBuffer)
-        vertexBuffer->Release();
-    if (indexBuffer)
-        indexBuffer->Release();
+
 }
 
 void Model3D::Draw()
 {
     UINT offset = 0;
-    UINT stride = sizeof(model_data);
+    UINT stride = sizeof(vertex_data);
 
     D3D11Core::Get().Context()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    D3D11Core::Get().Context()->IASetVertexBuffers(0, 1, &this->vertexBuffer, &stride, &offset);
-    D3D11Core::Get().Context()->IASetIndexBuffer(this->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
-    D3D11Core::Get().Context()->DrawIndexed(this->indexCount, 0, 0);
+    for (size_t m = 0; m < m_meshes.size(); m++)
+    {
+        D3D11Core::Get().Context()->IASetVertexBuffers(0, 1, &m_meshes[m].vertexBuffer, &stride, &offset);
+        D3D11Core::Get().Context()->IASetIndexBuffer(m_meshes[m].indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+        D3D11Core::Get().Context()->DrawIndexed(m_meshes[m].indexCount, 0, 0);
+    }
+
 }
 
 bool Model3D::Create(const std::string& filename)
 {
     Assimp::Importer importer;
+
+    importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_PRESERVE_PIVOTS, false);
 
     const aiScene* scene = importer.ReadFile
     (

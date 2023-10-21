@@ -36,14 +36,18 @@ class Model3D : public IResource
 {
 private:
 
-	ID3D11Buffer* vertexBuffer = nullptr;
-	UINT vertexCount = 0;
-	ID3D11Buffer* indexBuffer = nullptr;
-	UINT indexCount = 0;
+	struct submesh
+	{
+		ID3D11Buffer* vertexBuffer = nullptr;
+		UINT vertexCount = 0;
+		ID3D11Buffer* indexBuffer = nullptr;
+		UINT indexCount = 0;
+	};
+	std::vector<submesh> m_meshes;
 
-	bool CreateVertexBuffer(std::vector<model_data>& modelData);
+	bool CreateVertexBuffer(std::vector<vertex_data>& modelData, submesh& mesh);
 
-	bool CreateIndexBuffer(std::vector<UINT>& indices);
+	bool CreateIndexBuffer(std::vector<UINT>& indices, submesh& mesh);
 
 	void LoadBufferData(const aiScene* scene, const std::string& filename);
 

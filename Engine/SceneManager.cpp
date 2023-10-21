@@ -9,14 +9,15 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
-
+	delete m_currentScene;
 }
 
 void SceneManager::AddScene(const std::string& sceneName)
 {
-	Scene newScene;
-	m_scenes.insert_or_assign(sceneName, newScene);
-	Debugger::Get().Print("Added Scene: '" + sceneName + "'\n", Debugger::COLOR_GREEN);
+	m_currentScene = new Scene();
+	/*Scene newScene;
+	m_scenes.emplace(sceneName, std::move(newScene));
+	Debugger::Get().Print("Added Scene: '" + sceneName + "'\n", Debugger::COLOR_GREEN);*/
 }
 
 void SceneManager::SetScene(const std::string& sceneName)

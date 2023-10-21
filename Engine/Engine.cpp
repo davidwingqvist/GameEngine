@@ -16,21 +16,21 @@ Engine::Engine()
 	}
 
 	D3D11Core::Get().Initialize(&m_window);
-	D2D1Core::Get().Initialize();
+	if(!D2D1Core::Get().Initialize())
+		DEBUG_ERROR("D2D1Core couldnt initialize!\n")
 
 	this->m_renderer.Initialize();
 
 	m_sceneManager.AddScene("Test");
-	m_sceneManager.SetScene("Test");
+	//m_sceneManager.SetScene("Test");
 
-	ResourceManager::Get().GetResource<Model3D>("Villager.fbx");
 	DEBUG_INFO("The basics of the Engine is now up and running.\n");
 }
 
 Engine::Engine(const std::string& splashScreen)
 	:Engine()
 {
-	this->SetSplashScreen(splashScreen);
+	//this->SetSplashScreen(splashScreen);
 }
 
 Engine::~Engine()
@@ -59,21 +59,23 @@ void Engine::Draw()
 {
 	this->m_renderer.GetPipelineManager().ClearScreen();
 
-	D2D1Core::Get().Begin();
+	//D2D1Core::Get().Begin();
 
 	m_renderer.Draw(m_sceneManager.GetCurrentScene());
 
-	D2D1Core::Get().Commit();
+	//D2D1Core::Get().Commit();
 
 	D3D11Core::Get().Present();
 }
 
 void Engine::Build()
 {
+
 }
 
 void Engine::Start()
 {
+
 	while (!shutdown)
 	{
 		auto start = std::chrono::high_resolution_clock::now();
@@ -87,8 +89,9 @@ void Engine::Start()
 
 void Engine::SetSplashScreen(const std::string& fileName)
 {
+	
 	object2D splash(0,0, D3D11Core::Get().GetWindow()->GetWidth(), D3D11Core::Get().GetWindow()->GetHeight());
-
+	
 	Image2D* image = ResourceManager::Get().GetResource<Image2D>(fileName).get();
 
 	this->m_renderer.GetPipelineManager().ClearScreen();

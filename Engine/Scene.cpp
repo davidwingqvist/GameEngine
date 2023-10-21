@@ -1,10 +1,9 @@
 #include "Header.h"
 #include "Scene.h"
 #include "D3D11Context.h"
-#include "Resource.h"
-#include "Debugger.h"
+#include "ResourceManager.h"
 
-void UpdatePublicBuffer(ID3D11Buffer* buffer, const sm::Matrix& matrix_data)
+void UpdatePublicBuffer(ID3D11Buffer*& buffer, const sm::Matrix& matrix_data)
 {
 	D3D11_MAPPED_SUBRESOURCE sub;
 	HRESULT hr = D3D11Core::Get().Context()->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, NULL, &sub);
@@ -12,7 +11,7 @@ void UpdatePublicBuffer(ID3D11Buffer* buffer, const sm::Matrix& matrix_data)
 	{
 		DEBUG_ERROR("Failed to map public buffer for scene!\n");
 	}
-	std::memcpy(sub.pData, &matrix_data, sizeof(matrix_data));
+	std::memcpy(sub.pData, &matrix_data, sizeof(float) * 16);
 	D3D11Core::Get().Context()->Unmap(buffer, 0);
 
 }
@@ -23,7 +22,13 @@ Scene::Scene()
 	if (!this->CreatePublicBuffer())
 		DEBUG_ERROR("Creating public buffer failed for scene!\n")
 
-	UpdatePublicBuffer(m_publicBuffer, sm::Matrix());
+
+	recs::Entity ent = m_registry.CreateEntity();
+	transform* transf = m_registry.AddComponent<transform>(ent);
+	m_registry.AddComponent<model>(ent)->data = ResourceManager::Get().GetResource<Model3D>("Chest.obj").get();
+
+	transf->pos = { 5, 3.5, 25.5 };
+	//UpdatePublicBuffer(m_publicBuffer, transf->GetMatrix());
 }
 
 Scene::~Scene()
@@ -34,12 +39,13 @@ Scene::~Scene()
 
 bool Scene::CreatePublicBuffer()
 {
-	D3D11_BUFFER_DESC desc;
+	D3D11_BUFFER_DESC desc{};
 	desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
-	desc.ByteWidth = sizeof(sm::Matrix);
+	desc.ByteWidth = sizeof(float) * 16;
 	desc.Usage = D3D11_USAGE_DYNAMIC;
 	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	desc.MiscFlags = 0;
+	desc.StructureByteStride = 0;
 
 	return !FAILED(D3D11Core::Get().Device()->CreateBuffer(&desc, NULL, &m_publicBuffer));
 }
@@ -57,16 +63,19 @@ void Scene::Update()
 
 void Scene::PreDraw()
 {
-	// Public buffer is set to the first slot in Vertex Shader
-	D3D11Core::Get().Context()->VSSetConstantBuffers(0, 1, &m_publicBuffer);
+
 }
 
 void Scene::Draw()
 {
-	this->PreDraw();
-	m_registry.View<model>().ForEach([&](model& model){
+	//this->PreDraw();
+	// Public buffer is set to the first slot in Vertex Shader
+	D3D11Core::Get().Context()->VSSetConstantBuffers(0, 1, &m_publicBuffer);
 
-		UpdatePublicBuffer(m_publicBuffer, model.worldMatrix);
+	m_registry.Group<model, transform>().ForEach([&](model& model, transform& pos){
+
+
+		UpdatePublicBuffer(m_publicBuffer, pos.GetMatrix());
 
 		// draw each model.
 		model.data->Draw();
